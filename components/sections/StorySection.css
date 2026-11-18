@@ -1,0 +1,48 @@
+.story-scene {
+  --story-cream: #fff2df;
+  --story-gold: #dfb579;
+  padding: clamp(44px, 4.2vw, 70px) 0 clamp(40px, 4vw, 64px);
+  background: #321b17;
+  color: var(--story-cream);
+}
+.story-scene .story-scene-background { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.story-scene .story-scene-backgroundImage { object-fit: cover; object-position: center; }
+.story-scene .story-scene-content { position: relative; text-align: center; }
+.story-scene .story-scene-heading { margin-inline: auto; max-width: 900px; }
+.story-scene .story-scene-star { display: block; color: var(--story-gold); font-size: 17px; line-height: 1; margin-bottom: 12px; }
+.story-scene .story-scene-eyebrow { display: flex; align-items: center; justify-content: center; gap: 22px; color: #f3d7b3; font-size: 10px; font-weight: 500; letter-spacing: .4em; line-height: 1.5; text-transform: uppercase; }
+.story-scene .story-scene-eyebrow::before, .story-scene .story-scene-eyebrow::after { content: ""; width: 52px; height: 1px; background: linear-gradient(90deg, transparent, #d9ad7173); }
+.story-scene .story-scene-eyebrow::after { transform: rotate(180deg); }
+.story-scene h2 { margin-top: 15px; color: var(--story-cream); font-size: clamp(43px, 4.7vw, 68px); font-style: italic; font-weight: 400; letter-spacing: -.035em; line-height: 1.05; text-wrap: balance; }
+.story-scene h2 em { color: var(--story-gold); }
+.story-scene .story-scene-summary { max-width: 570px; margin: 12px auto 0; color: #f3e1cb; font-family: var(--font-display), Georgia, serif; font-size: clamp(18px, 1.6vw, 22px); font-style: italic; line-height: 1.35; text-wrap: balance; }
+.story-scene .story-scene-portraits { margin-top: 22px; }
+.story-scene .story-scene-fallback { display: grid; grid-template-columns: .8fr 1fr .8fr; align-items: center; gap: 22px; height: calc(var(--story-slide-height) + 80px); margin-block: 0; padding: 16px 0 64px; }
+.story-scene .story-scene-fallback > .photo-frame { height: 100%; border: 2px solid #f2ddbfbd; border-radius: 16px; aspect-ratio: auto; }
+.story-scene .story-scene-fallback > .photo-frame:not(:nth-child(2)) { height: 80%; }
+.story-scene .story-scene-details { width: min(100%, 620px); margin: 17px auto 0; }
+.story-scene .story-scene-details summary { display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 46px; padding: 10px 27px; border: 1px solid #d8ac727a; border-radius: 99px; background: linear-gradient(135deg, #84313980, #4d1c228c); color: var(--story-cream); list-style: none; font-family: var(--font-display), Georgia, serif; font-size: 18px; cursor: pointer; transition: background .25s, border-color .25s; }
+.story-scene .story-scene-details summary::-webkit-details-marker { display: none; }
+.story-scene .story-scene-details summary:hover { background: #86323a9c; border-color: var(--story-gold); }
+.story-scene .story-scene-details summary svg { transition: transform .25s; }
+.story-scene .story-scene-details[open] summary svg { transform: rotate(90deg); }
+.story-scene .story-scene-details > p { margin: 20px auto 0; padding: 21px 25px; border: 1px solid #d8ac723b; border-radius: 16px; background: #28141075; color: #f3e1cb; font-size: 14px; line-height: 1.85; text-wrap: pretty; }
+.story-scene :focus-visible { outline-color: var(--story-gold); }
+
+@media (max-width: 600px) {
+  .story-scene { padding-top: 42px; padding-bottom: 40px; }
+  .story-scene .section-shell { width: calc(100% - 40px); }
+  .story-scene .story-scene-backgroundImage { object-position: 48% center; }
+  .story-scene .story-scene-background::before, .story-scene .story-scene-background::after { content: ""; position: absolute; z-index: 1; width: 135px; height: 135px; background-image: var(--story-background); background-size: 620px auto; background-repeat: no-repeat; pointer-events: none; }
+  .story-scene .story-scene-background::before { top: 0; left: 0; background-position: left top; mask-image: linear-gradient(135deg, #000 35%, transparent 86%); }
+  .story-scene .story-scene-background::after { right: 0; bottom: 0; background-position: right bottom; mask-image: linear-gradient(315deg, #000 35%, transparent 86%); }
+  .story-scene .story-scene-heading { max-width: 420px; }
+  .story-scene .story-scene-star { font-size: 15px; margin-bottom: 10px; }
+  .story-scene .story-scene-eyebrow { font-size: 9px; gap: 16px; }
+  .story-scene .story-scene-eyebrow::before, .story-scene .story-scene-eyebrow::after { width: 35px; }
+  .story-scene h2 { max-width: 370px; margin-inline: auto; font-size: clamp(39px, 10.6vw, 53px); line-height: .98; margin-top: 15px; }
+  .story-scene .story-scene-summary { max-width: 350px; font-size: 18px; margin-top: 14px; }
+  .story-scene .story-scene-portraits { margin-top: 16px; }
+  .story-scene .story-scene-details { margin-top: 13px; }
+  .story-scene .story-scene-details > p { padding: 18px; text-align: left; font-size: 13px; }
+}

@@ -1,0 +1,31 @@
+.section-atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  contain: strict;
+  overflow: clip;
+  pointer-events: none;
+}
+
+.section-atmosphere-glow {
+  position: absolute;
+  inset: -16% -6%;
+  background:
+    radial-gradient(ellipse at 95% 30%, var(--glow-edge), transparent 54%),
+    radial-gradient(ellipse at 5% 75%, var(--glow-soft), transparent 50%);
+}
+
+.atmosphere-blush {
+  --glow-edge: #eac1ad36;
+  --glow-soft: #dda69f1a;
+}
+
+.atmosphere-champagne {
+  --glow-edge: #e6d3aa24;
+  --glow-soft: #eac1ad29;
+}
+
+.atmosphere-sage {
+  --glow-edge: #bfc3a526;
+  --glow-soft: #eac1ad1f;
+}
