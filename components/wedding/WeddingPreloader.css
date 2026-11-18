@@ -1,0 +1,107 @@
+.wedding-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  color: #fff3df;
+  background: radial-gradient(ellipse at 28% 16%, #6d28303d, transparent 60%),
+    radial-gradient(ellipse at 80% 85%, #8b412324, transparent 65%), #240e12;
+  /* Without JavaScript the server-rendered page remains reachable. */
+  animation: wedding-preloader-failsafe 0s 5s forwards;
+}
+
+.wedding-preloader-content {
+  width: min(1100px, 100% - 48px);
+  text-align: center;
+}
+
+.wedding-preloader-eyebrow {
+  margin: 0;
+  color: #e2bd86;
+  font-size: 10px;
+  letter-spacing: .38em;
+  text-transform: uppercase;
+}
+
+.wedding-preloader-words {
+  display: grid;
+  place-items: center;
+  min-height: clamp(150px, 19vw, 260px);
+  margin-block: 14px 2px;
+}
+
+.wedding-preloader-words p {
+  grid-area: 1 / 1;
+  margin: 0;
+  max-width: 15ch;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(44px, 7.5vw, 104px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.wedding-preloader-rule { color: #d7ad6d; }
+.wedding-preloader-rule > span { width: clamp(35px, 8vw, 85px); }
+.wedding-preloader-rule svg { width: 30px; height: 24px; }
+.wedding-preloader-line {
+  margin-top: 24px;
+  color: #d7c2b7;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(17px, 2vw, 21px);
+  font-style: italic;
+}
+
+.wedding-preloader-skip {
+  position: absolute;
+  top: max(24px, env(safe-area-inset-top));
+  right: max(28px, env(safe-area-inset-right));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 8px 12px;
+  color: #dfc8ac;
+  background: transparent;
+  font-size: 11px;
+  letter-spacing: .04em;
+  transition: color .2s;
+}
+.wedding-preloader-skip:hover { color: #fff3df; }
+.wedding-preloader-skip:focus-visible { outline: 1px solid #e2bd86; outline-offset: 4px; border-radius: 4px; }
+.wedding-preloader-date {
+  position: absolute;
+  bottom: max(34px, env(safe-area-inset-bottom));
+  font-size: 10px;
+  letter-spacing: .25em;
+  color: #d7ad6d;
+}
+.wedding-preloader-curve {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  width: 100%;
+  height: 12vh;
+  fill: #240e12;
+  pointer-events: none;
+}
+
+@keyframes wedding-preloader-failsafe {
+  to { visibility: hidden; pointer-events: none; }
+}
+
+@media (max-width: 600px) {
+  .wedding-preloader-words { min-height: 200px; }
+  .wedding-preloader-eyebrow { font-size: 9px; letter-spacing: .29em; }
+  .wedding-preloader-skip { right: 16px; top: max(12px, env(safe-area-inset-top)); }
+  .wedding-preloader-line { max-width: 26ch; margin: 22px auto 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wedding-preloader { display: none; }
+}

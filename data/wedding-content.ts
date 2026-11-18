@@ -41,6 +41,10 @@ export const wedding = {
   groom: "Deepak",
   monogram: { first: "D", second: "D" },
   subtitle: "The Wedding Story",
+  preloader: {
+    words: ["Two hearts", "One beautiful beginning"],
+    line: "With our families, and all our hearts.",
+  },
   date: { label: "24 November 2026", short: "24.11.2026", iso: "2026-11-24" },
   hero: {
     eyebrow: "The wedding of",
@@ -71,6 +75,7 @@ export const wedding = {
   invitation: {
     eyebrow: "You're invited",
     title: "Join Us in Our Celebration",
+    heading: { lead: "Join Us in Our", accent: "Celebration" },
     line: "Your presence will make our special day even more meaningful.",
   },
   links: {
@@ -87,6 +92,9 @@ export const wedding = {
     { id: "vivah", name: "Shubh Vivah", icon: "rings", moment: "The wedding ceremony", date: null, dateTime: null, time: null, status: "pending" },
   ] satisfies WeddingEvent[],
   images: {
+    galleryBackground: { src: "/Images/BgImages/GallerySectionBG.png" },
+    invitationBackground: { src: "/Images/BgImages/InvitationBg.png" },
+    invitationCard: { src: "/Images/BgImages/InvitationCenteredBG.png" },
     celebrationBackground: { src: "/Images/BgImages/The celebrationBG.png" },
     celebration: {
       lotus: { src: "/Images/Celebration/lotus-bowl.png", position: "68% 42%" },
@@ -114,7 +122,13 @@ export const wedding = {
       photograph("gallery-5", "IMG-20260614-WA0011.jpg.jpeg", "A full-length portrait of Divya and Deepak together", "50% 20%"),
       photograph("gallery-6", "IMG-20260716-WA0006.jpg.jpeg", "A candid moment between Divya and Deepak beneath the flowers", "50% 20%"),
     ],
-    venue: { ...image("venue", "venue", "sage", "An illustrative architectural placeholder, not a photograph of the venue"), aspectRatio: "16 / 10", objectPosition: "center" },
+    venue: {
+      ...image("venue", "venue", "sage", "Decorative guest house background with softly illuminated arches and floral framing"),
+      src: "/Images/BgImages/GuestHouseBG.png",
+      aspectRatio: "2172 / 724",
+      objectPosition: "42% 50%",
+      mobileObjectPosition: "18% 50%",
+    },
   },
 } as const;
 

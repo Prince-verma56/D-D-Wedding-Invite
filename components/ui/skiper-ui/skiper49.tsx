@@ -133,6 +133,6 @@ export function Carousel_003({ images, className = "", showPagination = false, s
  * Adapted from Skiper 49 Carousel_003 — React + Swiper by @gurvinder-singh02.
  * https://skiper-ui.com · https://gxuri.me
  * Free for personal and commercial use with Skiper UI attribution.
- * Attribution is retained in the site footer.
+ * Attribution is retained with the component source.
  */
 

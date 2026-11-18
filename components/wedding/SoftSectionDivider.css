@@ -1,0 +1,12 @@
+.soft-section-divider { position: relative; isolation: isolate; width: 100%; height: 42px; overflow: hidden; pointer-events: none; background: var(--color-bg); }
+.soft-section-divider-wine { height: 64px; background: linear-gradient(180deg, #2b1515, #4f2c24 22%, #a97658 52%, #eed7bf 82%, var(--color-bg)); }
+.soft-section-divider-glow { position: absolute; top: calc(50% - 6px); left: 50%; width: min(80%, 1100px); height: 12px; transform: translateX(-50%); border-radius: 50%; background: linear-gradient(90deg, transparent, #e9b66b73 25%, #ffe4abcc 50%, #e9b66b73 75%, transparent); filter: blur(8px); opacity: .65; }
+.soft-section-divider-line { position: absolute; top: 50%; left: 50%; width: min(82%, 1160px); height: 1px; transform: translateX(-50%); transform-origin: center; background: linear-gradient(90deg, transparent, #c6944d59 20%, #f1c985bf 50%, #c6944d59 80%, transparent); }
+.soft-section-divider-paper .soft-section-divider-glow { opacity: .35; }
+.soft-section-divider-paper .soft-section-divider-line { width: min(64%, 760px); opacity: .6; }
+@media (max-width: 599px) {
+  .soft-section-divider { height: 32px; }
+  .soft-section-divider-wine { height: 48px; }
+  .soft-section-divider-glow { width: 88%; filter: blur(6px); }
+  .soft-section-divider-line { width: 90%; }
+}

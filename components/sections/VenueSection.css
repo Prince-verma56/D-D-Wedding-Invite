@@ -1,0 +1,65 @@
+.venue-scene {
+  --venue-cream: #fff2df;
+  --venue-gold: #e0b575;
+  min-height: clamp(520px, 31.8vw, 640px);
+  background: #2b1515;
+  color: var(--venue-cream);
+}
+.venue-scene .venue-scene-media { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.venue-scene .venue-scene-media::after { content: ""; position: absolute; inset: auto 0 0; height: 28px; background: linear-gradient(180deg, transparent, #2b1515); pointer-events: none; }
+.venue-scene .venue-scene-parallax { position: absolute; inset: -3%; }
+.venue-scene .venue-scene-imageMotion { position: absolute; inset: 0; transform-origin: 30% 50%; }
+.venue-scene .venue-scene-image { object-fit: cover; object-position: var(--venue-image-position, 42% 50%); }
+.venue-scene .venue-scene-shade { position: absolute; inset: 0; background: linear-gradient(90deg, transparent 35%, #210b0710 54%, #210b072b); }
+.venue-scene .venue-scene-content { display: flex; align-items: center; justify-content: flex-end; width: min(calc(100% - var(--page-gutter) * 2), 1480px); min-height: inherit; padding-block: 70px; }
+.venue-scene .venue-scene-copy { position: relative; isolation: isolate; width: min(43%, 520px); min-width: 0; margin-right: 8px; }
+.venue-scene .venue-scene-copy::before { content: ""; position: absolute; inset: -32px -34px; z-index: -1; border: 1px solid #e0b5752e; border-radius: 76px 16px 16px; background: linear-gradient(135deg, #27100c17, #27100c30); pointer-events: none; }
+.venue-scene .venue-scene-eyebrow { display: flex; align-items: center; gap: 16px; color: #f2d5ad; font-size: 10px; font-weight: 500; line-height: 1.5; letter-spacing: .4em; text-transform: uppercase; }
+.venue-scene .venue-scene-eyebrow > span { width: 36px; height: 1px; flex-shrink: 0; background: linear-gradient(90deg, #d6a364, #d6a36445); }
+.venue-scene h2 { margin-top: 20px; color: var(--venue-cream); font-size: clamp(60px, 5vw, 78px); font-weight: 400; line-height: .98; letter-spacing: -.035em; }
+.venue-scene h2 > span, .venue-scene h2 > em { display: block; }
+.venue-scene h2 > em { margin-top: 7px; color: var(--venue-gold); font-weight: 400; }
+.venue-scene .venue-scene-location { display: flex; align-items: center; gap: 12px; margin-top: 25px; font-family: var(--font-display), Georgia, serif; font-size: clamp(22px, 1.7vw, 27px); line-height: 1.25; color: #fff0d8; }
+.venue-scene .venue-scene-pin { display: grid; place-items: center; width: 32px; height: 32px; flex-shrink: 0; border: 1px solid #ddb57542; border-radius: 50%; background: #dca85c0e; color: #ebc28a; }
+.venue-scene address { max-width: 360px; margin: 11px 0 0 44px; color: #e8ceba; font-size: 13px; font-style: normal; line-height: 1.85; text-wrap: pretty; }
+.venue-scene .venue-scene-actions { margin-top: 25px; margin-left: 44px; }
+.venue-scene .venue-scene-map { min-height: 46px; padding: 13px 27px; border-color: #edc58c; background: linear-gradient(135deg, #f5dfbd, #e6bb7c); color: #4b221b; font-size: 12px; font-weight: 600; box-shadow: 0 5px 22px #0e050821, inset 0 1px 0 #fff6df80; }
+.venue-scene .venue-scene-map:hover { background: #fff0d5; border-color: #fff0d5; box-shadow: 0 8px 24px #0e050830; }
+.venue-scene :focus-visible { outline-color: var(--venue-gold); }
+
+@media (min-width: 1000px) and (max-width: 1199px) {
+  .venue-scene .venue-scene-content { width: calc(100% - 72px); padding-block: 58px; }
+  .venue-scene .venue-scene-copy { width: 44%; margin-right: 0; }
+  .venue-scene .venue-scene-copy::before { inset: -27px -24px; border-radius: 60px 16px 16px; }
+  .venue-scene h2 { font-size: 60px; }
+  .venue-scene .venue-scene-location { font-size: 23px; }
+  .venue-scene address { margin-left: 0; max-width: 340px; }
+  .venue-scene .venue-scene-actions { margin-left: 0; }
+}
+@media (max-width: 999px) {
+  .venue-scene { --venue-photo-height: clamp(320px, 70vw, 460px); min-height: 0; }
+  .venue-scene .venue-scene-media { bottom: auto; height: var(--venue-photo-height); }
+  .venue-scene .venue-scene-parallax { inset: 0; }
+  .venue-scene .venue-scene-image { object-position: var(--venue-image-position-mobile, 18% 50%); }
+  .venue-scene .venue-scene-shade { background: linear-gradient(180deg, transparent 45%, #2b151536 70%, #2b1515 100%); }
+  .venue-scene .venue-scene-content { width: calc(100% - 64px); min-height: 0; justify-content: center; padding-top: clamp(295px, 67vw, 430px); padding-bottom: 64px; }
+  .venue-scene .venue-scene-copy { width: min(100%, 520px); margin: 0; text-align: center; }
+  .venue-scene .venue-scene-copy::before { inset: -27px -24px; border-radius: 55px 16px 16px; background: linear-gradient(150deg, #2b151520, #2b15154a); }
+  .venue-scene .venue-scene-eyebrow { justify-content: center; }
+  .venue-scene h2 { margin-top: 18px; font-size: clamp(58px, 8vw, 72px); }
+  .venue-scene .venue-scene-location { justify-content: center; font-size: 25px; }
+  .venue-scene address { max-width: 370px; margin-inline: auto; margin-top: 12px; }
+  .venue-scene .venue-scene-actions { margin-left: 0; margin-top: 24px; }
+}
+@media (max-width: 599px) {
+  .venue-scene .venue-scene-content { width: calc(100% - 48px); padding-top: clamp(295px, 77vw, 365px); padding-bottom: 48px; }
+  .venue-scene .venue-scene-copy::before { inset: -23px -17px; border-radius: 45px 14px 14px; }
+  .venue-scene .venue-scene-eyebrow { font-size: 9px; gap: 13px; letter-spacing: .32em; }
+  .venue-scene .venue-scene-eyebrow > span { width: 27px; }
+  .venue-scene h2 { font-size: clamp(54px, 14.5vw, 68px); }
+  .venue-scene .venue-scene-location { gap: 9px; margin-top: 23px; font-size: 23px; }
+  .venue-scene .venue-scene-pin { width: 29px; height: 29px; }
+  .venue-scene .venue-scene-pin svg { width: 16px; height: 16px; }
+  .venue-scene address { max-width: 310px; font-size: 12px; line-height: 1.85; }
+  .venue-scene .venue-scene-map { min-height: 46px; padding-inline: 26px; }
+}

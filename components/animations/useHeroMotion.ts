@@ -3,14 +3,16 @@
 import { useEffect, type RefObject } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useWeddingReady } from "@/components/wedding/WeddingPreloader";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /** Runs only after the hero's own DOM is mounted; every target is scoped to it. */
 export function useHeroMotion(root: RefObject<HTMLElement | null>) {
+  const ready = useWeddingReady();
   useEffect(() => {
     const element = root.current;
-    if (!element) return;
+    if (!element || !ready) return;
     const media = gsap.matchMedia();
     const context = gsap.context(() => {
       media.add("(prefers-reduced-motion: no-preference)", () => {
@@ -20,10 +22,10 @@ export function useHeroMotion(root: RefObject<HTMLElement | null>) {
         const motion = element.querySelector(".hero-image-motion");
         const sweep = element.querySelector(".hero-reveal-sweep");
         const image = element.querySelector<HTMLImageElement>("[data-hero-image]");
-        const entrance = gsap.timeline({ defaults: { ease: "power2.out" } });
+        const entrance = gsap.timeline({ delay: .3, defaults: { ease: "power3.out" } });
         if (eyebrow) entrance.from(eyebrow, { opacity: 0, y: 10, duration: .6 }, .08);
-        if (names.length) entrance.from(names, { opacity: 0, y: 14, filter: "blur(5px)", stagger: .12, duration: .85, clearProps: "filter,transform,opacity" }, .18);
-        if (details.length) entrance.from(details, { opacity: 0, y: 10, stagger: .065, duration: .65 }, .48);
+        if (names.length) entrance.from(names, { opacity: 0, y: 18, clipPath: "inset(0% 0% 100% 0%)", stagger: .14, duration: 1, clearProps: "clipPath,transform,opacity" }, .18);
+        if (details.length) entrance.from(details, { opacity: 0, y: 10, stagger: .075, duration: .75, clearProps: "opacity,transform" }, .65);
 
         const imageReveal = gsap.timeline({ paused: true });
         if (motion) imageReveal.fromTo(motion,
@@ -52,5 +54,5 @@ export function useHeroMotion(root: RefObject<HTMLElement | null>) {
       });
     }, element);
     return () => { media.revert(); context.revert(); };
-  }, [root]);
+  }, [root, ready]);
 }

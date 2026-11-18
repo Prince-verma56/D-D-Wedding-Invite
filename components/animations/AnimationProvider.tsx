@@ -4,25 +4,55 @@ import { useEffect, useRef, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import { useWeddingReady } from "@/components/wedding/WeddingPreloader";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /** One GSAP context and one desktop scroll ticker, both reverted on unmount. */
 export function AnimationProvider({ children }: { children: ReactNode }) {
   const root = useRef<HTMLDivElement>(null);
+  const ready = useWeddingReady();
   useEffect(() => {
+    if (!ready) return;
     const media = gsap.matchMedia();
     let lenis: Lenis | undefined;
     let tick: ((time: number) => void) | undefined;
     const context = gsap.context(() => {
       media.add("(prefers-reduced-motion: no-preference)", () => {
         const header = root.current?.querySelector(".site-header");
-        if (header) gsap.from(header, { opacity: 0, y: -8, duration: .45, ease: "power2.out" });
+        if (header) gsap.from(header, { opacity: 0, y: -8, delay: .25, duration: .6, ease: "power2.out", clearProps: "opacity,transform" });
         gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
-          gsap.from(element, { opacity: 0, y: 24, duration: .8, ease: "power2.out", scrollTrigger: { trigger: element, start: "top 93%", once: true } });
+          const content = element.querySelector(".invitation-scene-content") || element;
+          const grouped = content.matches(".story-scene-heading, .celebration-scene-heading, .gallery-copy, .invitation-scene-content, .site-footer");
+          const targets = grouped
+            ? Array.from(content.children).filter((child) => !child.matches(".footer-background"))
+            : [content];
+          const timeline = gsap.timeline({
+            defaults: { duration: .85, ease: "power3.out", clearProps: "opacity,transform,clipPath" },
+            scrollTrigger: { trigger: element, start: "top 91%", once: true },
+          });
+          targets.forEach((target, index) => {
+            // Mask complete text blocks without splitting accessible text or changing layout.
+            const heading = target.matches("h2, h3");
+            timeline.from(target, {
+              opacity: 0, y: heading ? 20 : 14,
+              ...(heading ? { clipPath: "inset(0% 0% 100% 0%)" } : {}),
+            }, index * .11);
+          });
+        });
+        gsap.utils.toArray<HTMLElement>("[data-soft-divider]").forEach((element) => {
+          const line = element.querySelector(".soft-section-divider-line");
+          if (line) gsap.from(line, { scaleX: .8, opacity: 0, duration: 1.15, ease: "power2.out", clearProps: "opacity,transform", scrollTrigger: { trigger: element, start: "top 96%", once: true } });
         });
         const events = gsap.utils.toArray<HTMLElement>(".wedding-event");
-        if (events.length) gsap.from(events, { opacity: 0, y: 18, stagger: .16, duration: .65, scrollTrigger: { trigger: events[0].parentElement, start: "top 88%", once: true } });
+        events.forEach((card, index) => {
+          const timeline = gsap.timeline({ scrollTrigger: { trigger: card, start: "top 91%", once: true } });
+          timeline.from(card, { opacity: 0, y: 26, duration: .8, delay: window.innerWidth >= 1000 ? index * .1 : 0, ease: "power3.out", clearProps: "opacity,transform" });
+          const title = card.querySelector("h3");
+          const schedule = card.querySelector(".celebration-card-schedule, .celebration-card-pending");
+          if (title) timeline.from(title, { clipPath: "inset(0% 0% 100% 0%)", y: 10, duration: .7, ease: "power3.out", clearProps: "clipPath,transform" }, .2);
+          if (schedule) timeline.from(schedule, { opacity: 0, y: 8, duration: .55, clearProps: "opacity,transform" }, .35);
+        });
       });
       media.add("(min-width: 1000px) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
         // Handle desktop anchors once, instead of racing native hash scrolling.
@@ -82,6 +112,6 @@ export function AnimationProvider({ children }: { children: ReactNode }) {
       media.revert();
       context.revert();
     };
-  }, []);
+  }, [ready]);
   return <div ref={root} className="wedding-experience">{children}</div>;
 }

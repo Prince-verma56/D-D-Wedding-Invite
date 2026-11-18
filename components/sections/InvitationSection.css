@@ -1,0 +1,57 @@
+.invitation-scene {
+  --invitation-cream: #fff2dd;
+  --invitation-gold: #e7bf7f;
+  padding: clamp(36px, 4.2vw, 68px) 0 40px;
+  background: var(--color-bg);
+}
+.invitation-scene .invitation-scene-background { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.invitation-scene .invitation-scene-backgroundImage { object-fit: cover; object-position: center; }
+.invitation-scene .invitation-scene-background::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--color-bg), transparent 85px, transparent calc(100% - 85px), var(--color-bg)); }
+.invitation-scene .invitation-scene-shell { width: min(calc(100% - var(--page-gutter) * 2), 1400px); }
+.invitation-scene .invitation-scene-card { position: relative; isolation: isolate; display: grid; place-items: center; min-height: 380px; overflow: hidden; padding: 56px clamp(36px, 6vw, 105px) 40px; border: 1px solid #c79a5e; border-radius: 72px 24px 72px 24px; background: #47080e; color: var(--invitation-cream); text-align: center; box-shadow: 0 18px 44px #722c301c, inset 0 0 0 1px #f3ca8d24; }
+.invitation-scene .invitation-scene-card::before { content: ""; position: absolute; inset: 8px; border: 1px solid #f2c88f33; border-radius: 64px 18px 64px 18px; pointer-events: none; }
+.invitation-scene .invitation-scene-artwork { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.invitation-scene .invitation-scene-cardImage { object-fit: cover; object-position: center; }
+.invitation-scene .invitation-scene-artwork::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, #26050924, transparent 75%); }
+.invitation-scene .invitation-scene-content { position: relative; width: min(100%, 1060px); min-width: 0; }
+.invitation-scene .invitation-scene-eyebrow { display: flex; justify-content: center; align-items: center; gap: 18px; color: #f6dcbb; font-size: 10px; font-weight: 500; letter-spacing: .38em; line-height: 1.5; text-transform: uppercase; }
+.invitation-scene .invitation-scene-eyebrow > span { width: 35px; height: 1px; flex-shrink: 0; background: linear-gradient(90deg, transparent, #e9bf7a99); }
+.invitation-scene .invitation-scene-eyebrow > span:last-child { transform: rotate(180deg); }
+.invitation-scene h2 { margin-top: 17px; color: var(--invitation-cream); font-size: clamp(43px, 4.2vw, 66px); font-weight: 400; line-height: 1.04; letter-spacing: -.035em; text-wrap: balance; }
+.invitation-scene h2 em { color: #f1cb8d; font-weight: 400; }
+.invitation-scene .invitation-scene-message { max-width: 720px; margin: 16px auto 0; color: #f8e6d0; font-family: var(--font-display), Georgia, serif; font-size: clamp(20px, 1.8vw, 25px); line-height: 1.35; text-wrap: balance; }
+.invitation-scene .invitation-scene-actions { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 18px; margin-top: 29px; }
+.invitation-scene .invitation-scene-rsvp { min-width: 190px; min-height: 48px; padding: 13px 28px; border-color: #edce9b; background: linear-gradient(135deg, #fff4dc, #f0d4a5); color: #631f2a; font-size: 12px; font-weight: 600; box-shadow: inset 0 1px 0 #fff9edbf, 0 5px 20px #20040933; }
+.invitation-scene .invitation-scene-rsvp:hover { border-color: #fff3dd; background: #fff3dd; box-shadow: 0 8px 24px #20040945; }
+.invitation-scene .invitation-scene-blessings { display: inline-flex; justify-content: center; align-items: center; gap: 10px; min-height: 48px; padding: 12px 22px; border: 1px solid #eccb983d; border-radius: 99px; background: #3d080f70; color: #ffeed6; font-size: 12px; transition: background .25s, border-color .25s, color .25s; }
+.invitation-scene .invitation-scene-blessings:hover { border-color: #e8bf7b; background: #70202b80; color: #ffe3b5; }
+.invitation-scene .invitation-scene-flourish { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 25px; color: #e2b779; opacity: .75; }
+.invitation-scene .invitation-scene-flourish > span { width: 45px; height: 1px; background: linear-gradient(90deg, transparent, #e2b77980); }
+.invitation-scene .invitation-scene-flourish > span:last-child { transform: rotate(180deg); }
+.invitation-scene .invitation-scene-flourish svg { width: 27px; height: 20px; }
+.invitation-scene :focus-visible { outline-color: #f1cb8d; }
+
+@media (max-width: 999px) {
+  .invitation-scene .invitation-scene-shell { width: calc(100% - 48px); }
+  .invitation-scene .invitation-scene-card { min-height: 370px; padding: 52px 40px 35px; border-radius: 56px 20px 56px 20px; }
+  .invitation-scene .invitation-scene-card::before { border-radius: 49px 15px 49px 15px; }
+  .invitation-scene h2 { max-width: 650px; margin-inline: auto; font-size: clamp(43px, 5.8vw, 57px); }
+  .invitation-scene .invitation-scene-message { max-width: 560px; font-size: 22px; }
+}
+@media (max-width: 599px) {
+  .invitation-scene { padding-top: 28px; padding-bottom: 22px; }
+  .invitation-scene .invitation-scene-shell { width: calc(100% - 32px); }
+  .invitation-scene .invitation-scene-card { min-height: 440px; padding: 75px 24px 45px; border-radius: 43px 16px 43px 16px; }
+  .invitation-scene .invitation-scene-card::before { inset: 7px; border-radius: 36px 11px 36px 11px; }
+  .invitation-scene .invitation-scene-artwork::before, .invitation-scene .invitation-scene-artwork::after { content: ""; position: absolute; inset: auto; z-index: 1; width: 145px; height: 130px; background-image: var(--invitation-card-background); background-size: 650px auto; background-repeat: no-repeat; }
+  .invitation-scene .invitation-scene-artwork::before { left: 0; top: 0; background-position: left top; mask-image: linear-gradient(135deg, #000 35%, transparent 89%); }
+  .invitation-scene .invitation-scene-artwork::after { right: 0; bottom: 0; background-position: right bottom; mask-image: linear-gradient(315deg, #000 35%, transparent 89%); }
+  .invitation-scene .invitation-scene-eyebrow { font-size: 9px; letter-spacing: .28em; gap: 11px; }
+  .invitation-scene .invitation-scene-eyebrow > span { width: 22px; }
+  .invitation-scene h2 { max-width: 330px; margin-top: 16px; font-size: clamp(38px, 10.6vw, 47px); line-height: 1.02; }
+  .invitation-scene .invitation-scene-message { max-width: 310px; margin-top: 14px; font-size: 20px; line-height: 1.3; }
+  .invitation-scene .invitation-scene-actions { flex-direction: column; gap: 10px; margin-top: 25px; }
+  .invitation-scene .invitation-scene-rsvp, .invitation-scene .invitation-scene-blessings { width: min(100%, 220px); min-height: 46px; }
+  .invitation-scene .invitation-scene-blessings { background: #3d080fcc; }
+  .invitation-scene .invitation-scene-flourish { margin-top: 22px; }
+}

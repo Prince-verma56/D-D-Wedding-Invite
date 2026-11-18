@@ -257,39 +257,13 @@ svg { flex-shrink: 0; }
 .carousel-counter { margin-top: 8px; text-align: center; font-size: 10px; color: var(--color-maroon); letter-spacing: .13em; }
 .carousel-counter > span { color: var(--color-muted); }
 
-/* Architecture and a calm, readable venue panel. */
-.venue-section { display: grid; grid-template-columns: 54% 46%; position: relative; min-height: 410px; background: #f8ece2; }
-.venue-visual { position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: 410px; margin: 0; }
-.venue-photo { position: relative; width: 100%; height: 100%; min-height: 320px; aspect-ratio: auto; border-radius: 0 100px 0 0; }
-.venue-photo .placeholder-art { inset: -5% 0; }
-.venue-photo .art-branch-right { right: -10%; }
-.venue-photo .venue-drawing { bottom: -7%; }
-.venue-image-note { position: relative; padding: 12px 24px; background: #e9e5cf; color: #4c5848; font-size: 11px; line-height: 1.6; letter-spacing: .035em; }
-.venue-copy { position: relative; padding: 48px 40px 48px clamp(40px, 6vw, 100px); overflow: hidden; align-self: center; }
-.venue-copy::before { content: ""; position: absolute; top: 25px; left: 25px; width: 50px; height: 80px; border-radius: 50px 0 0 0; border-left: 1px solid #c1915b80; border-top: 1px solid #c1915b80; }
-.venue-copy .eyebrow { margin-bottom: 19px; }
-.venue-copy h2 { font-size: clamp(45px, 4.4vw, 67px); }
-.venue-location { display: flex; gap: 12px; align-items: center; margin-top: 20px; font-family: var(--font-display), Georgia, serif; font-size: 23px; color: var(--color-maroon); line-height: 1.2; }
-.venue-location > svg { width: 18px; stroke: var(--color-bg); }
-.venue-copy address { font-size: 12px; font-style: normal; max-width: 340px; color: var(--color-muted); margin: 11px 0 23px 30px; line-height: 1.8; }
-.venue-copy .button { margin-left: 30px; position: relative; z-index: 2; }
-.venue-botanical { position: absolute; right: -45px; bottom: -70px; width: 170px; height: 300px; transform: rotate(-22deg); opacity: .4; }
+/* The venue composition is scoped in VenueSection.css. */
 
-/* The one deep wine moment is the closing invitation. */
-.invitation-section { padding: 48px var(--page-gutter) 20px; background: var(--color-bg); }
-.invitation-panel { position: relative; isolation: isolate; max-width: 1240px; margin: auto; padding: 47px 110px 42px; text-align: center; color: #fff5e8; background: radial-gradient(ellipse at 20% 0%, #b1535a6b, transparent 65%), linear-gradient(120deg, #8c3443, #7a2438 65%, #692335); border: 1px solid #c69255; border-radius: 115px 115px 80px 80px / 70px 70px 80px 80px; box-shadow: inset 0 0 0 5px #e0b98608; overflow: hidden; }
-.invitation-panel::before { content: ""; position: absolute; inset: 9px; border: 1px solid #ddba8626; border-radius: inherit; pointer-events: none; }
-.invitation-panel::after { content: ""; position: absolute; width: 300px; height: 300px; top: -170px; left: calc(50% - 150px); border: 1px solid #ddba8620; border-radius: 50%; z-index: -1; box-shadow: 0 0 0 18px #ddba8605, 0 0 0 35px #ddba8605, 0 0 0 52px #ddba8604; }
-.invitation-panel .eyebrow { color: #fbead7; margin-bottom: 13px; font-weight: 400; }
-.invitation-panel h2 { font-size: clamp(35px, 3.7vw, 54px); color: #fff4e7; letter-spacing: -.02em; }
-.invitation-content > p:not(.eyebrow) { margin-top: 13px; font-family: var(--font-display), Georgia, serif; font-size: 20px; }
-.invitation-actions { margin-top: 25px; display: flex; justify-content: center; align-items: center; gap: 27px; }
-.blessings-button { background: transparent; color: #ffead5; font-size: 11px; display: inline-flex; align-items: center; gap: 9px; min-height: 44px; transition: color .2s; }
-.blessings-button:hover { color: #d7ae75; }
-.invitation-branch { position: absolute; width: 150px; height: 230px; color: #d2ad69; top: 35px; z-index: -1; }
-.invitation-branch-left { left: 22px; transform: rotate(-20deg); }
-.invitation-branch-right { right: 22px; transform: rotate(20deg) scaleX(-1); }
-.site-footer { position: relative; padding: 29px 24px 23px; text-align: center; background: radial-gradient(ellipse at 50% 0%, #ffe9d780, transparent 65%); }
+/* The closing invitation is scoped in InvitationSection.css. */
+.site-footer { position: relative; isolation: isolate; overflow: clip; padding: 29px 24px 23px; text-align: center; background: var(--color-bg); }
+.footer-background { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.footer-backgroundImage { object-fit: cover; object-position: center bottom; }
+.footer-background::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--color-bg), transparent 70px), radial-gradient(ellipse at 50% 40%, #fff5ed73, transparent 72%); }
 .footer-mark { position: relative; width: 260px; margin: auto; }
 .footer-mark .monogram { font-size: 55px; }
 .footer-mark > .botanical { position: absolute; width: 62px; height: 100px; left: 5px; top: -2px; transform: rotate(-28deg); opacity: .9; }
@@ -299,8 +273,6 @@ svg { flex-shrink: 0; }
 .footer-subtitle > span { color: var(--color-gold); font-size: 10px; }
 .back-top { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; color: var(--color-maroon); font-size: 11px; min-height: 44px; }
 .footer-love { margin-top: 5px; font-size: 11px; color: var(--color-muted); }
-.footer-credit { display: inline-block; margin-top: 10px; color: var(--color-muted); font-size: 10px; text-underline-offset: 3px; }
-.footer-credit:hover { text-decoration: underline; }
 
 /* Native modal dialogs preserve keyboard focus and escape-to-close behavior. */
 .experience-dialog { border: 0; padding: 0; background: transparent; max-width: none; max-height: none; width: 100%; height: 100%; position: fixed; inset: 0; margin: 0; overflow-y: auto; color: var(--color-ink); overscroll-behavior: contain; }
@@ -341,8 +313,6 @@ svg { flex-shrink: 0; }
 @media (max-width: 1199px) {
   :root { --page-gutter: 5vw; }
   .gallery-layout { gap: 25px; grid-template-columns: minmax(0, .75fr) minmax(0, 1.7fr); }
-  .venue-copy { padding-left: 55px; }
-  .venue-copy::before { left: 15px; }
 }
 
 @media (max-width: 999px) {
@@ -366,21 +336,6 @@ svg { flex-shrink: 0; }
   .photo-carousel { --slide-width: 208px; }
   .carousel-bottom { gap: 8px; }
   .carousel-dots button { width: 28px; }
-  .venue-section { min-height: 385px; grid-template-columns: 50% 50%; }
-  .venue-visual { min-height: 385px; }
-  .venue-copy { padding: 38px 28px 38px 38px; }
-  .venue-copy::before { left: 10px; width: 35px; }
-  .venue-copy h2 { font-size: 47px; }
-  .venue-location { font-size: 20px; gap: 8px; }
-  .venue-copy address { margin-left: 26px; font-size: 11px; }
-  .venue-copy .button { margin-left: 26px; padding-inline: 21px; }
-  .venue-image-note { padding: 11px 22px; font-size: 10px; }
-  .invitation-panel { padding: 40px 70px 35px; border-radius: 75px 75px 45px 45px / 50px 50px 45px 45px; }
-  .invitation-panel h2 { font-size: 39px; }
-  .invitation-content > p:not(.eyebrow) { font-size: 18px; }
-  .invitation-branch { width: 110px; height: 190px; top: 45px; opacity: .65; }
-  .invitation-branch-left { left: 2px; }
-  .invitation-branch-right { right: 2px; }
 }
 
 @media (max-width: 767px) {
@@ -407,31 +362,8 @@ svg { flex-shrink: 0; }
   .carousel-photo { border-width: 3px; border-radius: 17px; }
   .carousel-bottom { gap: 7px; }
   .carousel-dots button { width: 32px; }
-  .venue-section { display: flex; flex-direction: column; min-height: 0; }
-  .venue-visual { min-height: 0; margin-right: 25px; }
-  .venue-photo { height: auto; min-height: clamp(235px, 60vw, 335px); aspect-ratio: 16 / 10; border-radius: 0 70px 0 0; }
-  .venue-image-note { padding: 11px 22px; font-size: 10px; }
-  .venue-photo .venue-drawing { bottom: -7%; width: 100%; left: 0; height: 110%; }
-  .venue-copy { padding: 38px 32px 42px; width: 100%; }
-  .venue-copy::before { left: auto; right: 29px; top: 28px; width: 42px; height: 64px; transform: rotate(90deg); opacity: .6; }
-  .venue-copy .eyebrow { margin-bottom: 15px; }
-  .venue-copy h2 { font-size: 51px; }
-  .venue-location { margin-top: 19px; font-size: 22px; gap: 10px; }
-  .venue-copy address { font-size: 12px; max-width: 270px; margin: 10px 0 22px 28px; }
-  .venue-copy .button { margin-left: 28px; min-height: 44px; }
-  .venue-botanical { width: 150px; height: 250px; bottom: -40px; right: -60px; opacity: .25; }
-  .invitation-section { padding: 40px 16px 18px; }
-  .invitation-panel { padding: 37px 26px 33px; border-radius: 70px 70px 30px 30px / 35px 35px 30px 30px; }
-  .invitation-panel .eyebrow { font-size: 10px; margin-bottom: 15px; letter-spacing: .25em; }
-  .invitation-panel h2 { font-size: clamp(35px, 8.5vw, 42px); max-width: 300px; margin: auto; line-height: 1.04; }
-  .invitation-content > p:not(.eyebrow) { font-size: 18px; line-height: 1.3; max-width: 270px; margin: 13px auto 0; }
-  .invitation-actions { flex-direction: column; margin-top: 22px; gap: 5px; }
-  .invitation-actions .button { min-height: 44px; min-width: 190px; }
-  .blessings-button { font-size: 12px; min-height: 44px; }
-  .invitation-branch { width: 90px; height: 155px; top: auto; bottom: -10px; opacity: .4; }
-  .invitation-branch-left { left: -26px; }
-  .invitation-branch-right { right: -26px; }
   .site-footer { padding: 28px 24px 22px; }
+  .footer-backgroundImage { object-position: left bottom; }
   .footer-mark .monogram { font-size: 50px; }
   .footer-names { font-size: 18px; }
   .footer-love { font-size: 10px; }
@@ -449,7 +381,6 @@ svg { flex-shrink: 0; }
 @media (max-width: 374px) {
   .carousel-bottom { gap: 6px; }
   .carousel-dots button { width: 30px; }
-  .invitation-panel { padding-inline: 23px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -24,7 +24,7 @@ export function StorySection() {
             <Skiper49 images={wedding.images.story} />
           </Suspense>
         </div>
-        <details className="story-scene-details">
+        <details className="story-scene-details" data-reveal>
           <summary>Read Our Story <ArrowRight size={17} aria-hidden="true" /></summary>
           <p>{wedding.story.expanded}</p>
         </details>
