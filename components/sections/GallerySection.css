@@ -19,11 +19,17 @@
 .circular-gallery-section .gallery-copy h2 { font-size: clamp(42px, 5vw, 72px); }
 .circular-gallery-section .gallery-copy .section-copy { max-width: none; margin: 16px auto 0; }
 .wedding-moments { margin: clamp(30px, 4vw, 56px) auto 0; padding-inline: clamp(20px, 4vw, 64px); }
-.wedding-moments-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 24px); }
+.wedding-moments-grid {
+  display: grid;
+  grid-auto-flow: dense;
+  grid-auto-rows: clamp(76px, 8vw, 116px);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 1.6vw, 24px);
+}
 .wedding-moment {
   position: relative;
+  grid-row: span 2;
   min-width: 0;
-  aspect-ratio: 4 / 5;
   overflow: hidden;
   border: 1px solid #bc874766;
   border-radius: clamp(12px, 1.5vw, 22px);
@@ -31,6 +37,9 @@
   box-shadow: 0 12px 32px #5a182314;
   isolation: isolate;
 }
+.wedding-moment[data-size="feature"] { grid-column: span 2; grid-row: span 3; }
+.wedding-moment[data-size="tall"] { grid-row: span 3; }
+.wedding-moment-open { position: absolute; inset: 0; display: block; width: 100%; height: 100%; overflow: hidden; border: 0; padding: 0; background: transparent; cursor: zoom-in; }
 .wedding-moment::after {
   position: absolute;
   z-index: 1;
@@ -39,9 +48,30 @@
   content: "";
   pointer-events: none;
 }
-.wedding-moment-image-layer { position: absolute; inset: -5% 0; }
+.wedding-moment-image-layer { position: absolute; inset: -5% 0; display: block; }
 .wedding-moment-image { object-fit: cover; transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
-.wedding-moment:hover .wedding-moment-image { transform: scale(1.055); }
+.wedding-moment-open:hover .wedding-moment-image { transform: scale(1.055); }
+.wedding-moment-zoom {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid #fff9f180;
+  border-radius: 50%;
+  background: #351d1b75;
+  color: #fff9f1;
+  font-size: 23px;
+  line-height: 1;
+  opacity: 0;
+  transform: scale(.85);
+  transition: opacity .25s, transform .25s;
+}
+.wedding-moment-open:hover .wedding-moment-zoom,
+.wedding-moment-open:focus-visible .wedding-moment-zoom { opacity: 1; transform: scale(1); }
 .wedding-moment-caption {
   position: absolute;
   z-index: 2;
@@ -54,16 +84,52 @@
   padding: clamp(12px, 1.5vw, 20px);
   color: #fff8f2;
 }
+.wedding-moment-open:focus-visible,
+.wedding-photo-viewer button:focus-visible { outline: 2px solid #f0c98e; outline-offset: -4px; }
 .wedding-moment-caption span { color: #f0c98e; font-size: 11px; font-variant-numeric: tabular-nums; letter-spacing: .12em; }
 .wedding-moment-caption p { margin: 0; font-family: var(--font-display), Georgia, serif; font-size: clamp(14px, 1.3vw, 18px); line-height: 1.25; text-wrap: pretty; }
+.wedding-photo-viewer {
+  width: min(96vw, 1440px);
+  max-width: none;
+  height: min(94dvh, 1000px);
+  max-height: none;
+  overflow: hidden;
+  border: 1px solid #d5b78e66;
+  border-radius: 20px;
+  padding: clamp(12px, 2vw, 26px);
+  background: #211713;
+  color: #fff8f2;
+}
+.wedding-photo-viewer::backdrop { background: #160e0dcc; backdrop-filter: blur(8px); }
+.wedding-photo-viewer-content { display: flex; width: 100%; height: 100%; flex-direction: column; }
+.wedding-photo-viewer-header { display: flex; min-height: 42px; align-items: flex-start; justify-content: space-between; }
+.wedding-photo-viewer-header p { margin: 0; color: #f0c98e; font-size: 12px; letter-spacing: .12em; }
+.wedding-photo-viewer-header p span { color: #fff8f280; }
+.wedding-photo-viewer-close,
+.wedding-photo-viewer-nav { display: grid; flex: 0 0 auto; place-items: center; border: 1px solid #fff8f24d; border-radius: 50%; background: #fff8f20d; color: #fff8f2; cursor: pointer; transition: background .2s, border-color .2s; }
+.wedding-photo-viewer-close { width: 42px; height: 42px; margin: -5px -5px 0 0; }
+.wedding-photo-viewer-nav { width: 48px; height: 48px; }
+.wedding-photo-viewer-close:hover,
+.wedding-photo-viewer-nav:hover { border-color: #f0c98e; background: #fff8f21c; }
+.wedding-photo-viewer-stage { display: flex; min-height: 0; flex: 1; align-items: center; justify-content: space-between; gap: clamp(8px, 2vw, 28px); }
+.wedding-photo-viewer-image { position: relative; width: 100%; height: 100%; min-width: 0; }
+.wedding-photo-viewer-full-image { object-fit: contain; }
+.wedding-photo-viewer-caption { margin: 14px auto 2px; color: #f4e4d3; font-family: var(--font-display), Georgia, serif; font-size: clamp(16px, 2vw, 21px); text-align: center; text-wrap: balance; }
 @media (max-width: 767px) {
   .gallery-background img { object-position: 40% center; }
   .wedding-moments { padding-inline: 20px; }
-  .wedding-moments-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .wedding-moments-grid { grid-auto-rows: clamp(70px, 22vw, 112px); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .wedding-moment[data-size="tall"] { grid-row: span 2; }
   .wedding-moment-caption { gap: 7px; padding: 11px; }
   .wedding-moment-caption span { font-size: 9px; }
   .wedding-moment-caption p { font-size: 13px; }
+  .wedding-moment-zoom { top: 10px; right: 10px; width: 32px; height: 32px; opacity: 1; transform: none; }
+  .wedding-photo-viewer { width: 100vw; height: 100dvh; border: 0; border-radius: 0; padding: max(14px, env(safe-area-inset-top)) 12px max(16px, env(safe-area-inset-bottom)); }
+  .wedding-photo-viewer-stage { gap: 8px; }
+  .wedding-photo-viewer-nav { width: 38px; height: 38px; }
+  .wedding-photo-viewer-caption { margin-top: 10px; font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .wedding-moment-image { transition: none; }
+  .wedding-moment-image,
+  .wedding-moment-zoom { transition: none; }
 }

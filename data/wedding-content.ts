@@ -134,6 +134,10 @@ export const wedding = {
       photograph("gallery-17", "new imags/IMG-20260706-WA0041.jpg.jpeg", "A family celebration with Divya and Deepak"),
       photograph("gallery-18", "new imags/IMG-20260706-WA0067.jpg.jpeg", "The couple celebrating with family beneath the flowers"),
       photograph("gallery-19", "new imags/IMG-20260716-WA0000.jpg.jpeg", "A candid moment from the family celebrations"),
+      photograph("gallery-20", "new imags/IMG_20260605_191117.jpg.jpeg", "Deepak celebrating with his friends"),
+      photograph("gallery-21", "new imags/Screenshot_2026-06-07-13-40-52-473_com.google.android.apps.photos-edit.jpg.jpeg", "A family portrait beneath the wedding flowers"),
+      photograph("gallery-22", "new imags/Screenshot_2026-06-07-13-42-27-527_com.google.android.apps.photos-edit.jpg.jpeg", "A joyful group portrait with Divya and Deepak"),
+      photograph("gallery-23", "new imags/Screenshot_2026-06-07-14-04-10-865_com.google.android.apps.photos-edit.jpg.jpeg", "Divya and Deepak with family beneath the flowers"),
     ],
     venue: {
       ...image("venue", "venue", "sage", "Decorative guest house background with softly illuminated arches and floral framing"),
