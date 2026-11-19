@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
-import { useReducedMotion } from "motion/react";
+import { useEffect, useRef, useState, useSyncExternalStore, type KeyboardEvent } from "react";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import type { Swiper as SwiperInstance } from "swiper";
 import { Autoplay, EffectCoverflow } from "swiper/modules";
@@ -19,6 +18,16 @@ type CarouselProps = {
   showNavigation?: boolean;
 };
 
+const motionQuery = "(prefers-reduced-motion: reduce)";
+const subscribeToMotion = (notify: () => void) => {
+  const media = window.matchMedia(motionQuery);
+  media.addEventListener("change", notify);
+  return () => media.removeEventListener("change", notify);
+};
+const readMotionPreference = () => window.matchMedia(motionQuery).matches;
+// Start conservatively and hydrate against the same value on both sides.
+const serverMotionPreference = () => true;
+
 export function Skiper49({ images }: Pick<CarouselProps, "images">) {
   return <Carousel_003 images={images} showPagination showNavigation />;
 }
@@ -35,7 +44,7 @@ export function Carousel_003({ images, className = "", showPagination = false, s
   const [instanceVersion, setInstanceVersion] = useState(0);
   const [paused, setPaused] = useState(false);
   const region = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useSyncExternalStore(subscribeToMotion, readMotionPreference, serverMotionPreference);
   const active = realIndex % images.length;
 
   useEffect(() => {
@@ -45,7 +54,9 @@ export function Carousel_003({ images, className = "", showPagination = false, s
     instance.params.speed = reduced ? 0 : 750;
     let visible = false;
     const updatePlayback = () => {
-      if (!instance.destroyed && visible && !paused && !reduced && !document.hidden) instance.autoplay.start();
+      const shouldPlay = visible && !paused && !reduced && !document.hidden;
+      if (!instance.destroyed && typeof instance.params.autoplay === "object") instance.params.autoplay.enabled = shouldPlay;
+      if (!instance.destroyed && shouldPlay) instance.autoplay.start();
       else if (!instance.destroyed) instance.autoplay.stop();
     };
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; updatePlayback(); }, { threshold: .2 });
@@ -102,8 +113,10 @@ export function Carousel_003({ images, className = "", showPagination = false, s
         spaceBetween={12}
         grabCursor
         slideToClickedSlide
-        speed={reduced ? 0 : 750}
-        autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true, stopOnLastSlide: false }}
+        // Keep the server and first client render identical. The mounted effect
+        // applies the visitor's motion preference before enabling autoplay.
+        speed={750}
+        autoplay={{ enabled: false, delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true, stopOnLastSlide: false }}
         coverflowEffect={{ rotate: 0, stretch: 16, depth: 90, scale: .85, slideShadows: false }}
         onSwiper={(instance) => { slider.current = instance; setInstanceVersion((version) => version + 1); }}
         onRealIndexChange={(instance) => setRealIndex(instance.realIndex)}
@@ -122,7 +135,7 @@ export function Carousel_003({ images, className = "", showPagination = false, s
           {images.map((image, index) => <button key={image.id} type="button" aria-label={"Show story portrait " + (index + 1)} aria-current={active === index ? "true" : undefined} onClick={() => goTo(index)}><span /></button>)}
         </div>}
         {showNavigation && <button type="button" className="skiper-story-arrow" aria-label="Next story portrait" onClick={() => slider.current?.slideNext()}><ChevronRight size={18} aria-hidden="true" /></button>}
-        {!reduced && <button type="button" className="skiper-story-arrow skiper-story-playback" aria-label={paused ? "Resume story slideshow" : "Pause story slideshow"} onClick={() => setPaused(!paused)}>{paused ? <Play size={14} fill="currentColor" aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}</button>}
+        <button type="button" className="skiper-story-arrow skiper-story-playback" aria-label={paused ? "Resume story slideshow" : "Pause story slideshow"} onClick={() => setPaused(!paused)}>{paused ? <Play size={14} fill="currentColor" aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}</button>
       </div>
       <span className="sr-only" aria-live={paused || reduced ? "polite" : "off"} aria-atomic="true">Portrait {active + 1} of {images.length}</span>
     </div>

@@ -10,7 +10,7 @@ export function StorySection() {
   return (
     <section id="our-story" className="story-scene section-anchor" aria-labelledby="story-title" data-nav-theme="dark" style={{ "--story-background": 'url("' + wedding.images.storyBackground.src + '")' } as CSSProperties}>
       <div className="story-scene-background" aria-hidden="true">
-        <Image src={wedding.images.storyBackground.src} alt="" fill sizes="100vw" className="story-scene-backgroundImage" />
+        <Image src={wedding.images.storyBackground.src} alt="" fill sizes="100vw" loading="eager" className="story-scene-backgroundImage" />
       </div>
       <div className="section-shell story-scene-content">
         <div className="story-scene-heading" data-reveal>

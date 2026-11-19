@@ -12,7 +12,7 @@ export function CelebrationSection() {
   return (
     <section id="celebration" className="celebration-scene section-anchor" aria-labelledby="celebration-title" data-nav-theme="dark">
       <div className="celebration-scene-background" aria-hidden="true">
-        <div className="celebration-scene-scenery" data-background-parallax><Image src={wedding.images.celebrationBackground.src} alt="" fill sizes="100vw" className="celebration-scene-backgroundImage" /></div>
+        <div className="celebration-scene-scenery" data-background-parallax><Image src={wedding.images.celebrationBackground.src} alt="" fill sizes="100vw" loading="eager" className="celebration-scene-backgroundImage" /></div>
       </div>
       <svg className="celebration-scene-definitions" width="0" height="0" aria-hidden="true" focusable="false"><defs><clipPath id="celebration-card-wave" clipPathUnits="objectBoundingBox"><path d="M.23 0 C.62 .08 .74 1.22 1 .88 V0Z" /></clipPath></defs></svg>
       <div className="section-shell celebration-scene-content">

@@ -65,8 +65,8 @@ export const wedding = {
     note: "With our families, and with all our hearts.",
   },
   venue: {
-    name: "Lav Kush Guest House",
-    heading: { firstLine: "Lav Kush", secondLine: "Guest House" },
+    name: "Love Kush Guest House",
+    heading: { firstLine: "Love Kush", secondLine: "Guest House" },
     shortAddress: "Nawabganj, Farrukhabad",
     address: "Mohammadabad Road, Nawabganj, District Farrukhabad, Uttar Pradesh",
     /** Add the family-verified map pin; no inferred map links are published. */

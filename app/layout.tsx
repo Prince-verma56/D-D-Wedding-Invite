@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans, Geist } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans, Geist, Lora } from "next/font/google";
 import { wedding } from "@/data/wedding-content";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { MusicPlayer } from "@/components/music/MusicPlayer";
+import { WeddingMusicProvider } from "@/components/music/WeddingMusicProvider";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -16,6 +18,12 @@ const display = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   style: ["normal", "italic"],
+  display: "swap",
+});
+
+const cardSerif = Lora({
+  variable: "--font-card-serif",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -39,10 +47,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={cn(sans.variable + " " + display.variable, "font-sans", geist.variable)}
+      className={cn(sans.variable + " " + display.variable, "font-sans", geist.variable, cardSerif.variable)}
       suppressHydrationWarning
     >
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning><WeddingMusicProvider>{children}<MusicPlayer /></WeddingMusicProvider></body>
     </html>
   );
 }

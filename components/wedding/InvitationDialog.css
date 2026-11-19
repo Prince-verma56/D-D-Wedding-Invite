@@ -1,0 +1,154 @@
+.experience-dialog.invitation-dialog {
+  height: 100dvh;
+  font-family: var(--font-body), Arial, sans-serif;
+}
+.experience-dialog.invitation-dialog::backdrop {
+  background: #2c171fa6;
+  backdrop-filter: blur(9px);
+}
+.invitation-dialog .invitation-dialog-panel {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 510px);
+  max-height: calc(100dvh - 48px);
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #ceab80;
+  border-radius: 28px;
+  background: #fffaf5;
+  box-shadow: 0 28px 100px #28101952, inset 0 0 0 5px #fffaf5;
+}
+.invitation-dialog .dialog-close {
+  z-index: 2;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  background: #fffaf5b3;
+  border: 1px solid #d8b89466;
+}
+.invitation-dialog-heading {
+  flex-shrink: 0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 23px 28px 22px;
+  background: radial-gradient(ellipse at 50% 0%, #fff9e9, #f5e5d8 65%, #efdbd4);
+  border-bottom: 1px solid #dab99a;
+}
+.invitation-dialog-heading::before {
+  content: "";
+  position: absolute;
+  inset: 8px 8px 0;
+  border: 1px solid #c69b684d;
+  border-bottom: 0;
+  border-radius: 20px 20px 0 0;
+  pointer-events: none;
+}
+.invitation-dialog-botanical {
+  position: absolute;
+  z-index: -1;
+  bottom: -24px;
+  width: 94px;
+  height: 153px;
+  color: #ad8049;
+  opacity: .28;
+}
+.invitation-dialog-botanical-left { left: -22px; transform: rotate(22deg); }
+.invitation-dialog-botanical-right { right: -22px; transform: scaleX(-1) rotate(22deg); }
+.invitation-dialog-seal {
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  margin: 0 auto 12px;
+  border: 1px solid #c89d66;
+  border-radius: 50%;
+  color: #9d6a32;
+  background: #fff6e87a;
+  box-shadow: 0 0 0 4px #fff8ed70;
+}
+.invitation-dialog-seal svg { width: 27px; height: 21px; }
+.invitation-dialog .invitation-dialog-heading .eyebrow {
+  font-family: var(--font-body), Arial, sans-serif;
+  color: #946139;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  margin-bottom: 10px;
+}
+.invitation-dialog-names {
+  font-family: var(--font-card-serif), Georgia, serif;
+  color: var(--color-maroon);
+  font-size: clamp(26px, 6vw, 33px);
+  font-weight: 500;
+  letter-spacing: -.045em;
+  line-height: 1.3;
+}
+.invitation-dialog-names > span { color: #a7753e; font-style: italic; font-weight: 400; }
+.invitation-dialog-details {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px 15px;
+  margin-top: 15px;
+  color: #78534f;
+  font-size: 10px;
+  line-height: 1.6;
+}
+.invitation-dialog-details > span { display: inline-flex; align-items: center; justify-content: center; gap: 5px; }
+.invitation-dialog .invitation-dialog-content { min-height: 0; padding: 23px 30px 27px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #d9b6a3 transparent; }
+.invitation-response-eyebrow { color: #946139; font-size: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 8px; }
+.invitation-dialog .invitation-dialog-content h2 {
+  max-width: 100%;
+  font-family: var(--font-card-serif), Georgia, serif;
+  font-size: 23px;
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1.3;
+  margin-bottom: 11px;
+}
+.invitation-dialog .guest-form { gap: 14px; }
+.invitation-dialog .guest-form > p:first-child { color: #7b5a60; font-size: 12px; line-height: 1.7; margin-bottom: 3px; }
+.invitation-dialog .guest-form label { gap: 6px; font-size: 11px; font-weight: 500; line-height: 1.5; }
+.invitation-dialog .guest-form input, .invitation-dialog .guest-form select, .invitation-dialog .guest-form textarea {
+  min-height: 46px;
+  border: 1px solid #ddc8b7;
+  border-radius: 10px;
+  background: #fffdf9;
+  padding: 11px 12px;
+  color: #52363d;
+  font-family: var(--font-body), Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  transition: border-color .2s, box-shadow .2s;
+}
+.invitation-dialog .guest-form input:focus, .invitation-dialog .guest-form select:focus, .invitation-dialog .guest-form textarea:focus {
+  border-color: #a96b6f;
+  box-shadow: 0 0 0 3px #d4a3a324;
+}
+.invitation-dialog .guest-form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.invitation-dialog .invitation-draft-note { border: 1px solid #eadbcd; border-radius: 10px; padding: 10px 12px; color: #806368; background: #f8eee6; font-size: 10px; line-height: 1.6; }
+.invitation-dialog .guest-form .button { min-height: 46px; font-family: var(--font-body), Arial, sans-serif; font-size: 12px; box-shadow: 0 4px 14px #78223818; }
+.invitation-dialog .form-success h3 { font-family: var(--font-card-serif), Georgia, serif; font-size: 23px; line-height: 1.3; }
+.invitation-dialog .form-success p { color: #7b5a60; font-size: 12px; }
+@media (max-width: 767px) {
+  .experience-dialog.invitation-dialog[open] { padding: 12px; }
+  .invitation-dialog .invitation-dialog-panel { max-height: calc(100dvh - 24px); border-radius: 23px; }
+  .invitation-dialog-heading { padding: 16px 20px 14px; }
+  .invitation-dialog-seal { width: 36px; height: 36px; margin-bottom: 8px; }
+  .invitation-dialog-seal svg { width: 24px; height: 19px; }
+  .invitation-dialog .invitation-dialog-heading .eyebrow { margin-bottom: 7px; }
+  .invitation-dialog .invitation-dialog-content { padding: 18px 22px 20px; }
+  .invitation-dialog .invitation-dialog-content h2 { font-size: 20px; margin-bottom: 8px; }
+  .invitation-response-eyebrow { margin-bottom: 6px; }
+  .invitation-dialog .guest-form { gap: 12px; }
+  .invitation-dialog .guest-form > p:first-child { margin-bottom: 0; }
+  .invitation-dialog .guest-form label { gap: 5px; }
+  .invitation-dialog .guest-form input, .invitation-dialog .guest-form select, .invitation-dialog .guest-form textarea { min-height: 44px; padding: 9px 12px; font-size: 16px; }
+  .invitation-dialog .invitation-draft-note { padding-block: 8px; }
+  .invitation-dialog-details { gap: 5px 12px; margin-top: 10px; font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .invitation-dialog * { transition: none !important; }
+}

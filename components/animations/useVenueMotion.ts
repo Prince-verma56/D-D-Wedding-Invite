@@ -21,12 +21,12 @@ export function useVenueMotion(root: RefObject<HTMLElement | null>) {
         const image = element.querySelector<HTMLImageElement>("[data-venue-image]");
         if (details.length) gsap.from(details, {
           opacity: 0, y: 16, stagger: .085, duration: .85, ease: "power3.out", clearProps: "opacity,transform",
-          scrollTrigger: { trigger: element, start: "top 82%", once: true },
+          scrollTrigger: { trigger: element, start: "top 82%", toggleActions: "play none none none" },
         });
         const title = element.querySelector("h2");
         if (title) gsap.from(title, {
           clipPath: "inset(0% 0% 100% 0%)", duration: 1, ease: "power3.out", clearProps: "clipPath",
-          scrollTrigger: { trigger: title, start: "top 88%", once: true },
+          scrollTrigger: { trigger: title, start: "top 88%", toggleActions: "play none none none" },
         });
         if (!motion) return;
         const reveal = gsap.fromTo(motion, { scale: 1.025, opacity: .8 }, {
@@ -40,7 +40,7 @@ export function useVenueMotion(root: RefObject<HTMLElement | null>) {
           image?.addEventListener("load", onReady, { once: true });
           image?.addEventListener("error", onReady, { once: true });
         }
-        ScrollTrigger.create({ trigger: element, start: "top 96%", once: true, onEnter: () => { inView = true; play(); } });
+        ScrollTrigger.create({ trigger: element, start: "top 96%", onEnter: () => { inView = true; play(); } });
         return () => {
           image?.removeEventListener("load", onReady);
           image?.removeEventListener("error", onReady);

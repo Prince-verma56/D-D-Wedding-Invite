@@ -2,11 +2,11 @@
 
 import { useRef, type CSSProperties } from "react";
 import { useHeroMotion } from "@/components/animations/useHeroMotion";
-import { ArrowDown, Play } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 import { wedding } from "@/data/wedding-content";
 import { Button } from "@/components/ui/Button";
-import { ActionButton } from "@/components/wedding/WeddingExperience";
+import { HeroMusicToggle } from "@/components/music/HeroMusicToggle";
 import { FlowerMark } from "@/components/wedding/Ornaments";
 import "./HeroSection.css";
 
@@ -52,10 +52,7 @@ export function HeroSection() {
           <p className="hero-detail cinematic-hero-line">{wedding.hero.line}</p>
           <div className="hero-detail cinematic-hero-actions">
             <Button href="#our-story" className="cinematic-hero-storyButton">Explore Our Story</Button>
-            <ActionButton action="intro" className="cinematic-hero-introButton">
-              <span className="cinematic-hero-playIcon"><Play size={15} fill="currentColor" aria-hidden="true" /></span>
-              Watch Intro
-            </ActionButton>
+            <HeroMusicToggle />
           </div>
           <p className="hero-detail cinematic-hero-date">
             <time dateTime={wedding.date.iso}>{wedding.date.label}</time>

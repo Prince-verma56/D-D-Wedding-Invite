@@ -59,5 +59,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .skiper-story-carousel .skiper-story-playback { display: none; }
   .skiper-story-carousel *, .skiper-story-carousel *::before, .skiper-story-carousel *::after { transition-duration: 0s !important; }
 }

@@ -2,9 +2,10 @@
 
 import { createContext, useContext, useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { MotionConfig, motion } from "motion/react";
-import { ArrowRight, ArrowUpRight, Check, Copy, Heart, MapPin, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CalendarDays, Check, Copy, Heart, MapPin, X } from "lucide-react";
 import { wedding } from "@/data/wedding-content";
-import { FlowerMark, Monogram } from "./Ornaments";
+import { Botanical, FlowerMark, Lotus, Monogram } from "./Ornaments";
+import "./InvitationDialog.css";
 
 type Action = "rsvp" | "blessings" | "intro" | "venue";
 const DialogContext = createContext<(action: Action) => void>(() => {});
@@ -27,6 +28,7 @@ function ExperienceDialog({ action, close }: { action: Action; close: () => void
   const [copied, setCopied] = useState(false);
   const [copyError, setCopyError] = useState(false);
   const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const invitation = action === "rsvp" || action === "blessings";
   useEffect(() => {
     const element = dialog.current;
     const previouslyFocused = document.activeElement as HTMLElement | null;
@@ -53,14 +55,18 @@ function ExperienceDialog({ action, close }: { action: Action; close: () => void
   }
 
   return (
-    <dialog ref={dialog} className="experience-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description" data-lenis-prevent onCancel={(event) => { event.preventDefault(); close(); }} onClick={(event) => { if (event.target === event.currentTarget) close(); }}>
-      <motion.div className="dialog-panel" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .25 }}>
+    <dialog ref={dialog} className={`experience-dialog${invitation ? " invitation-dialog" : ""}`} aria-labelledby="dialog-title" aria-describedby="dialog-description" data-lenis-prevent onCancel={(event) => { event.preventDefault(); close(); }} onClick={(event) => { if (event.target === event.currentTarget) close(); }}>
+      <motion.div className={`dialog-panel${invitation ? " invitation-dialog-panel" : ""}`} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .25 }}>
         <button className="dialog-close icon-button" onClick={close} aria-label="Close dialog"><X size={21} /></button>
-        <Monogram className="dialog-monogram" />
-        <p className="eyebrow">{action === "venue" ? "The venue" : action === "intro" ? "The wedding story" : action === "rsvp" ? "You’re invited" : "With love"}</p>
-        <h2 id="dialog-title">{titles[action]}</h2>
-        <FlowerMark />
-        {action === "rsvp" || action === "blessings" ? <GuestForm action={action} /> : action === "venue" ? <div className="venue-dialog-content">
+        {invitation ? <header className="invitation-dialog-heading">
+          <Botanical className="invitation-dialog-botanical invitation-dialog-botanical-left" />
+          <Botanical className="invitation-dialog-botanical invitation-dialog-botanical-right" />
+          <span className="invitation-dialog-seal" aria-hidden="true"><Lotus /></span>
+          <p className="eyebrow">{action === "rsvp" ? "You’re warmly invited" : "With all our love"}</p>
+          <p className="invitation-dialog-names">{wedding.bride} <span>&amp;</span> {wedding.groom}</p>
+          <div className="invitation-dialog-details"><span><CalendarDays size={12} aria-hidden="true" /><time dateTime={wedding.date.iso}>{wedding.date.label}</time></span><span><MapPin size={12} aria-hidden="true" />{wedding.venue.shortAddress}</span></div>
+        </header> : <><Monogram className="dialog-monogram" /><p className="eyebrow">{action === "venue" ? "The venue" : "The wedding story"}</p><h2 id="dialog-title">{titles[action]}</h2><FlowerMark /></>}
+        {action === "rsvp" || action === "blessings" ? <div className="invitation-dialog-content"><p className="invitation-response-eyebrow">{action === "rsvp" ? "A celebration made complete by you" : "Words we’ll keep close to our hearts"}</p><h2 id="dialog-title">{titles[action]}</h2><GuestForm action={action} /></div> : action === "venue" ? <div className="venue-dialog-content">
           <MapPin size={27} aria-hidden="true" /><h3>{wedding.venue.name}</h3>
           <p id="dialog-description">{wedding.venue.address}</p>
           <p className="form-note">The exact map pin will be shared once confirmed by the family. For now, you can copy the venue address.</p>
@@ -118,10 +124,10 @@ function GuestForm({ action }: { action: "rsvp" | "blessings" }) {
       <p id="dialog-description">{action === "rsvp" ? "We’d love to celebrate with you." : "A few heartfelt words for a beautiful forever."}</p>
       <label htmlFor="guest-name">Your name<input id="guest-name" autoComplete="name" required maxLength={80} placeholder="Your full name" value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} /></label>
       {action === "rsvp" ? <>
-        <label htmlFor="guest-attendance">Will you be joining us?<select id="guest-attendance" value={draft.attendance} onChange={(event) => setDraft({ ...draft, attendance: event.target.value })}><option value="yes">Joyfully attending</option><option value="maybe">Still making plans</option><option value="no">Celebrating from afar</option></select></label>
-        {draft.attendance !== "no" && <label htmlFor="guest-count">Number of guests, including you<select id="guest-count" value={draft.guests} onChange={(event) => setDraft({ ...draft, guests: event.target.value })}>{[1, 2, 3, 4, 5, 6].map((n) => <option key={n} value={n}>{n} {n === 1 ? "guest" : "guests"}</option>)}</select></label>}
+        <div className="guest-form-row"><label htmlFor="guest-attendance">Will you be joining us?<select id="guest-attendance" value={draft.attendance} onChange={(event) => setDraft({ ...draft, attendance: event.target.value })}><option value="yes">Joyfully attending</option><option value="maybe">Still making plans</option><option value="no">Celebrating from afar</option></select></label>
+        {draft.attendance !== "no" && <label htmlFor="guest-count">Guests, including you<select id="guest-count" value={draft.guests} onChange={(event) => setDraft({ ...draft, guests: event.target.value })}>{[1, 2, 3, 4, 5, 6].map((n) => <option key={n} value={n}>{n} {n === 1 ? "guest" : "guests"}</option>)}</select></label>}</div>
       </> : <label htmlFor="guest-blessing">Your blessing<textarea id="guest-blessing" rows={4} required maxLength={1000} placeholder="Wishing you a lifetime of…" value={draft.message} onChange={(event) => setDraft({ ...draft, message: event.target.value })} /></label>}
-      <p className="form-note">A little preview: your {action === "rsvp" ? "response" : "blessing"} stays on this device and isn’t sent to the family yet.</p>
+      <p className="form-note invitation-draft-note">Your {action === "rsvp" ? "response" : "blessing"} is saved on this device. Nothing is sent to the family yet.</p>
       {error && <p className="form-error" role="alert">{error}</p>}
       <button className="button" type="submit">Save my {action === "rsvp" ? "response" : "blessing"} <ArrowUpRight size={17} /></button>
     </form>
