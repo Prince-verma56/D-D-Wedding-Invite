@@ -1,6 +1,6 @@
 import { wedding } from "@/data/wedding-content";
 import Image from "next/image";
-import { WeddingCircularGallery } from "@/components/wedding/WeddingCircularGallery";
+import { WeddingMomentGallery } from "@/components/wedding/WeddingMomentGallery";
 import "./GallerySection.css";
 
 export function GallerySection() {
@@ -15,7 +15,7 @@ export function GallerySection() {
           <h2 id="gallery-title">{wedding.gallery.heading.firstLine} <em>{wedding.gallery.heading.secondLine}</em></h2>
           <p className="section-copy">{wedding.gallery.line}</p>
         </div>
-        <WeddingCircularGallery />
+        <WeddingMomentGallery />
       </div>
     </section>
   );
